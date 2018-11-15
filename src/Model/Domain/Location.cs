@@ -13,7 +13,7 @@ namespace HuntingSpots.Model.Domain
         public string Name { get; set; }
         [Required]
         public decimal Latitude { get; set; }
-        [Required)]
+        [Required]
         public decimal Longitude { get; set; }
 
         public static Location From(Entity entity)
