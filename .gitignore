@@ -3,6 +3,7 @@
 ################################################################################
 
 /src/WebLibrary/.vs
+/src/WebLibrary/WebLibrary.csproj.user
 /src/WebLibrary/bin
 /src/WebLibrary/obj
 /src/WebLibrary/node_modules

@@ -33,17 +33,17 @@ namespace HuntingSpots.Model.Test.Service
         public class FileLocation
         {
             public string name { get; set; }
-            public decimal latitude { get; set; }
-            public decimal? latitudeMinutes { get; set; }
-            public decimal longitude { get; set; }
-            public decimal? longitudeMinutes { get; set; }
+            public double latitude { get; set; }
+            public double? latitudeMinutes { get; set; }
+            public double longitude { get; set; }
+            public double? longitudeMinutes { get; set; }
 
             public Location ToLocation()
             {
                 return new Location
                 {
                     Name = name,
-                    Longitude = longitude + (longitudeMinutes.HasValue ? longitudeMinutes.Value/60 : 0),
+                    Longitude = longitude + (longitudeMinutes.HasValue ? longitudeMinutes.Value / 60 : 0),
                     Latitude = latitude + (latitudeMinutes.HasValue ? latitudeMinutes.Value / 60 : 0),
                 };
             }

@@ -86,7 +86,7 @@ namespace HuntingSpots.WebLibrary.Controllers
             return View(location);
         }
         
-        public IActionResult Create(decimal? latitude, decimal? longitude)
+        public IActionResult Create(double? latitude, double? longitude)
         {
             var location = new Location
             {
