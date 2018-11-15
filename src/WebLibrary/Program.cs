@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace HuntingSpots
+namespace HuntingSpots.WebLibrary
 {
     public class Program
     {

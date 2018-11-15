@@ -3,9 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>HuntingSpots</AssemblyName>
+    <AssemblyName>HuntingSpots.WebLibrary</AssemblyName>
     <PackageId>HuntingSpots</PackageId>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <RootNamespace>HuntingSpots.WebLibrary</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,10 +23,10 @@
 
   <Target Name="NpmInstall" BeforeTargets="Build" Inputs="package.json" Outputs="node_modules">
     <Exec Command="where npm" IgnoreExitCode="True" EchoOff="True" StandardOutputImportance="Low" StandardErrorImportance="Low">
-      <Output TaskParameter="ExitCode" PropertyName="_whereNpmExitCode"/>
+      <Output TaskParameter="ExitCode" PropertyName="_whereNpmExitCode" />
     </Exec>
-    <Warning Condition="$(_whereNpmExitCode) == 1" Text="npm packages were not installed: could not find npm on the path"/>
-    <Exec Condition="$(_whereNpmExitCode) != 1" Command="npm install --loglevel error"/>
+    <Warning Condition="$(_whereNpmExitCode) == 1" Text="npm packages were not installed: could not find npm on the path" />
+    <Exec Condition="$(_whereNpmExitCode) != 1" Command="npm install --loglevel error" />
   </Target>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
@@ -34,6 +35,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
 </Project>

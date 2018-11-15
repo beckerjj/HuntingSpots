@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Model.Test": {
+      "commandName": "Project"
+    }
+  }
+}

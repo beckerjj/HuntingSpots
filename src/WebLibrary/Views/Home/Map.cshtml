@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Map";
+}
+
+<style type="text/css">
+    body #bigMap {
+        width: 100%;
+        height: calc(100vh - 142px);
+        border: 1px solid black;
+    }
+</style>
+
+<div id="bigMap"></div>
+
+
+@section scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQQ84Q8AREAR4bjG-OleJKaWV9kLtJ3sE" type="text/javascript"></script>
+    <script type="text/javascript">
+        var Places = @Html.Raw(ViewData["Locations"]);
+        var view = new mapView({
+            createUrl: '@Url.Action("Create", "Home", new { latitude = "latV", longitude = "longV" })'
+        });
+    </script>
+
+}
