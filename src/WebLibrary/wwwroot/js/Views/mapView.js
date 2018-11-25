@@ -35,6 +35,7 @@
     bigMap = new google.maps.Map(document.getElementById('bigMap'), bigMapOptions);
 
     var infowindow = new google.maps.InfoWindow();
+    var positionInfowindow = new google.maps.InfoWindow();
     var positionMarker;
     var positionAccuracyCircle;
 
@@ -46,19 +47,16 @@
         });
 
         google.maps.event.addListener(marker, 'click', function () {
+            positionInfowindow.close();
             infowindow.setContent('<div style="display: table;"><a href="' + place.link + '" title="Go to Google Maps"><b>' + place.Name + '</b></a></div>');
             infowindow.open(bigMap, marker);
         });
     });
 
-    GetLocation(function (position) {
+    function getLocationSuccess(position) {
         var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-        // $('#lat').text(position.coords.latitude);
-        // $('#long').text(position.coords.longitude);
-        // $('#updates').text(++positionUpdates);
-
-        //$('#log').append('<tr><td>' + position.coords.latitude + '</td><td>' + position.coords.longitude + '</td><td>' + position.coords.accuracy + '</td><td>' + (position.coords.speed || 'N/A') + '</td><td>' + (position.coords.speed * 2.23694 || 'N/A') + '</td><td>' + (position.coords.heading || 'N/A') + '</td></tr>');
+        
+        positionInfowindow.setContent('<a href="' + config.createUrl.replace('latV', position.coords.latitude).replace('longV', position.coords.longitude) + '"><b>Save Location</b></a><br>Accuracy ' + position.coords.accuracy + 'm');
 
         if (!positionMarker) {
             positionMarker = new google.maps.Marker({
@@ -75,8 +73,8 @@
             });
                        
             google.maps.event.addListener(positionMarker, 'click', function () {
-                infowindow.setContent('<a href="' + config.createUrl.replace('latV', position.coords.latitude).replace('longV', position.coords.longitude) + '">Save Location</a>');
-                infowindow.open(bigMap, positionMarker);
+                infowindow.close();
+                positionInfowindow.open(bigMap, positionMarker);
             });
 
             bigMap.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
@@ -100,9 +98,9 @@
             positionAccuracyCircle.setCenter(center);
             positionAccuracyCircle.setRadius(position.coords.accuracy);
         }
-    });
+    };
 
-    function GetLocation(success, fail) {
+    function hookupGetLocation(success, fail) {
         if (navigator.geolocation) {
             //navigator.geolocation.getCurrentPosition(success, function showError(error) {
             navigator.geolocation.watchPosition(success, function (error) {
@@ -128,4 +126,6 @@
             alert("Geolocation is not supported by this browser.");
         }
     };
+
+    hookupGetLocation(getLocationSuccess, null)
 };
